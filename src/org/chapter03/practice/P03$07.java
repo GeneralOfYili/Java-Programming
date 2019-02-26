@@ -1,7 +1,11 @@
 package org.chapter03.practice;
 
 import java.util.Scanner;
-
+/**
+ * sort
+ * @author lenovo
+ *
+ */
 public class P03$07 {
 
 	public static void main(String[] args) {
