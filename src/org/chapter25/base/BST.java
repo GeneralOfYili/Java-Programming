@@ -1,5 +1,6 @@
 package org.chapter25.base;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class BST<E extends Comparable<E>> extends AbstractTree<E> {
@@ -7,11 +8,11 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 	protected TreeNode<E> root;
 	protected int size = 0;
 	
-	/*Creat a default binary tree*/
+	/**Creat a default binary tree*/
 	public BST() {
 	}
 	
-	@Override/*Return true is the element is in the tree*/
+	@Override/**Return true is the element is in the tree*/
 	public boolean search(E e) {
 		TreeNode<E> current = root;//Start from root
 		
@@ -25,8 +26,8 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return false;
 	}
 
-	@Override/*Insert element e into the binary search tree.
-	           return true if the element is inserted successfully*/
+	@Override/**Insert element e into the binary search tree.
+	            return true if the element is inserted successfully*/
 	public boolean insert(E e) {
 		if (root == null) {
 			root = createNewNode(e); //Create a new root
@@ -57,7 +58,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return new TreeNode<>(e);
 	}
 	
-	@Override/*Inorder traversal from the root*/
+	@Override/**Inorder traversal from the root*/
 	public void inorder() {
 		inorder(root);
 	}
@@ -71,7 +72,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		inorder(root.right);
 	}
 
-	@Override/*postorder traversal from the root*/
+	@Override/**postorder traversal from the root*/
 	public void postorder() {
 		postorder(root);
 	}
@@ -85,7 +86,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		System.out.println(root.element+" ");
 	}
 
-	@Override/*preeorder traversal from the root*/
+	@Override/**preeorder traversal from the root*/
 	public void preeorder() {
 		preeorder(root);
 	}
@@ -98,7 +99,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		inorder(root.left);
 		inorder(root.right);
 	}
-	/*inner class*/
+	/**inner class*/
 	public static class TreeNode<E extends Comparable<E>> {
 		protected E element;
 		protected TreeNode<E> left;
@@ -119,8 +120,56 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return root;
 	}
 	
-	@Override
+	/**Returns a path from the root leading to the specified element*/
+	public ArrayList<TreeNode<E>> path(E e) {
+		ArrayList<TreeNode<E>> list = new ArrayList<TreeNode<E>>();
+		TreeNode<E> current = root; // Start from the root
+		while (current != null) {
+			list.add(current);
+			if (e.compareTo(current.element) < 0) {
+				current = current.left;
+			}else if(e.compareTo(current.element) > 0) {
+				current = current.right;
+			}else break;
+		}
+		return list;
+	}
+	
+	@Override/**Delete an element from the binary search tree.
+	 		   *Return true if the element is deleted successfully
+	 		   *Return false if the element is not in the tree*/
 	public boolean delete(E e) {
+		// Locate the node to be deleted and also locate its parent node
+		TreeNode<E> parent = null;
+		TreeNode<E> current = root; // Start from the root
+		while (current != null) {
+			if (e.compareTo(current.element) < 0) {
+				parent = current;
+				current = current.left;
+			}else if(e.compareTo(current.element) > 0) {
+				parent = current;
+				current = current.right;
+			}else break; // Element is in the tree pointed at by current
+		}
+		
+		if(current == null) {
+			return false; // Element is not in the tree
+			}
+		// Case 1: current has no left child
+		if (current.left == null) {
+			if(parent == null) {
+				root = current.right;
+			}else { // Reconnect parent
+				if (e.compareTo(parent.element) < 0) {
+					parent.left = current.right;
+				}else {
+					parent.right = current.right;
+				}
+			}
+		}else {
+		// Case 2: The current node has a left child
+		// Locate the right most node in the left subtree of the current node and also its parent.
+		}
 		return false;
 	}
 
