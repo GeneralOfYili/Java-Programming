@@ -56,17 +56,74 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 	private TreeNode<E> createNewNode(E e) {
 		return new TreeNode<>(e);
 	}
-//---------------------------------------------------------------------------------
+	
+	@Override/*Inorder traversal from the root*/
+	public void inorder() {
+		inorder(root);
+	}
 
+	private void inorder(TreeNode<E> root) {
+		if (root == null) {
+			return;
+		}
+		inorder(root.left);
+		System.out.println(root.element+" ");
+		inorder(root.right);
+	}
+
+	@Override/*postorder traversal from the root*/
+	public void postorder() {
+		postorder(root);
+	}
+
+	private void postorder(TreeNode<E> root) {
+		if (root == null) {
+			return;
+		}
+		inorder(root.left);
+		inorder(root.right);
+		System.out.println(root.element+" ");
+	}
+
+	@Override/*preeorder traversal from the root*/
+	public void preeorder() {
+		preeorder(root);
+	}
+
+	private void preeorder(TreeNode<E> root2) {
+		if (root == null) {
+			return;
+		}
+		System.out.println(root.element+" ");
+		inorder(root.left);
+		inorder(root.right);
+	}
+	/*inner class*/
+	public static class TreeNode<E extends Comparable<E>> {
+		protected E element;
+		protected TreeNode<E> left;
+		protected TreeNode<E> right;
+		
+		public TreeNode(E element) {
+			this.element = element;
+		}
+	}
+
+	@Override
+	public int getSize() {
+		return size;
+	}
+	
+	/**Returens the root from the tree*/
+	public TreeNode<E> getRoot(){
+		return root;
+	}
+	
 	@Override
 	public boolean delete(E e) {
 		return false;
 	}
 
-	@Override
-	public int getSize() {
-		return 0;
-	}
 
 	@Override
 	public Iterator<E> iterator() {
