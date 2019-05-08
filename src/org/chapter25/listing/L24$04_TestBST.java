@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.chapter25.base.BST;
 import org.chapter25.base.BST.TreeNode;
 
-public class TestBST {
+public class L24$04_TestBST {
 	public static void main(String[] args) {
 		// Create a BST
 		BST<String> tree = new BST<>();
