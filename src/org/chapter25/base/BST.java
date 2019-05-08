@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class BST<E extends Comparable<E>> extends AbstractTree<E> {
    
 	protected TreeNode<E> root;
-	protected int size = 0;
+	public int size = 0;
 	
 	/**Creat a default binary tree*/
 	public BST() {
@@ -106,7 +106,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 	}
 	/**inner class*/
 	public static class TreeNode<E extends Comparable<E>> {
-		protected E element;
+		public E element;
 		protected TreeNode<E> left;
 		protected TreeNode<E> right;
 		
