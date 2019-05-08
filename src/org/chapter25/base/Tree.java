@@ -15,10 +15,11 @@ public interface Tree<E> extends Iterable<E> {
 	public void postorder();
 	
 	//前序
-	public void preeorder();
+	public void preorder();
 	
 	public int getSize();
 	
 	public boolean isEmpty();
+
 	
 }

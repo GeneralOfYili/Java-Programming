@@ -11,7 +11,12 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 	/**Creat a default binary tree*/
 	public BST() {
 	}
-	
+	/**Creat a default binary tree from an array of objects*/
+	public BST(E[] objects) {
+		for (int i = 0; i < objects.length; i++) {
+			insert(objects[i]);
+		}
+	}
 	@Override/**Return true is the element is in the tree*/
 	public boolean search(E e) {
 		TreeNode<E> current = root;//Start from root
@@ -68,7 +73,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			return;
 		}
 		inorder(root.left);
-		System.out.println(root.element+" ");
+		System.out.print(root.element+" ");
 		inorder(root.right);
 	}
 
@@ -81,23 +86,23 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		if (root == null) {
 			return;
 		}
-		inorder(root.left);
-		inorder(root.right);
-		System.out.println(root.element+" ");
+		postorder(root.left);
+		postorder(root.right);
+		System.out.print(root.element+" ");
 	}
 
-	@Override/**preeorder traversal from the root*/
-	public void preeorder() {
-		preeorder(root);
+	@Override/**preorder traversal from the root*/
+	public void preorder() {
+		preorder(root);
 	}
 
-	private void preeorder(TreeNode<E> root2) {
+	private void preorder(TreeNode<E> root) {
 		if (root == null) {
 			return;
 		}
-		System.out.println(root.element+" ");
-		inorder(root.left);
-		inorder(root.right);
+		System.out.print(root.element+" ");
+		preorder(root.left);
+		preorder(root.right);
 	}
 	/**inner class*/
 	public static class TreeNode<E extends Comparable<E>> {
@@ -169,14 +174,86 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		}else {
 		// Case 2: The current node has a left child
 		// Locate the right most node in the left subtree of the current node and also its parent.
+			TreeNode<E> parentOfRightMost = current;
+			TreeNode<E> rightMost = current.left;
+			
+			// Keep going to ghe right
+			while (rightMost.right != null) {
+				parentOfRightMost = rightMost;
+				rightMost = rightMost.right;
+			}
+			
+			//Replace the element in current by the element in rightMost
+			current.element = rightMost.element;
+			
+			// Eliminate rightmost node
+			if (parentOfRightMost.right == rightMost) {
+				parentOfRightMost.right = rightMost.left;
+			}else {
+				parentOfRightMost.left = rightMost.left;
+			}
 		}
+		size--;
 		return false;
 	}
 
 
-	@Override
+	@Override/**Obtain an iterator.Use inorder.*/
 	public Iterator<E> iterator() {
-		return null;
+		return new InorderIterator();
 	}
+	
+	/**Inner class InorderIterator*/
+	private class InorderIterator implements Iterator<E>{
+		
+		// Store the elements in a list
+		private ArrayList<E> list = new ArrayList<E>();
+		// Point to the current element in list
+		private int current = 0;
+		
+		
+		public InorderIterator() {
+			inorder(); // Traverse binary tree and store elements in list
+		}
+		
+		/**Inorder traversal from the root*/
+		private void inorder() {
+			inorder(root);
+		}
+		/**Inorder traversal from the subtree*/
+		private void inorder(TreeNode<E> root) {
+			if (root == null) {
+				return;
+			}
+			inorder(root.left);
+			list.add(root.element);
+			inorder(root.right);
+		}
 
+		@Override
+		public boolean hasNext() {
+			if (current < list.size()) {
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public E next() {
+			return list.get(current++);
+		}
+
+		@Override/** Remove the current element*/
+		public void remove() {
+			delete(list.get(current));
+			list.clear();
+			inorder();//Rebuild the list
+		}
+	}
+	
+	/** Remove all element from the tree*/
+	public void clear() {
+		root = null;
+		size = 0;
+	}
 }

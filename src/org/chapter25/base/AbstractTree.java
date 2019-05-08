@@ -15,8 +15,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
 	}
 
 	@Override
-	public void preeorder() {
-		// TODO Auto-generated method stub
+	public void preorder() {
 
 	}
 
@@ -25,5 +24,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
 		// TODO Auto-generated method stub
 		return getSize() == 0;
 	}
+
+	
 
 }
