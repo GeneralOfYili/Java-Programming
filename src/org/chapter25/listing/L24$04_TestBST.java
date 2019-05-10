@@ -40,10 +40,15 @@ public class L24$04_TestBST {
 		}
 		
 		//Integer tree
-		Integer[] numbers = {2,4,3,1,8,5,6,7};
+		Integer[] numbers = {1,4,3,2,8,5,6,7};
 		BST<Integer> intTree = new BST<>(numbers);
 		System.out.println();
+		System.out.println("中序");
 		intTree.inorder();
+		System.out.println("\n前序");
+		intTree.preorder();
+		System.out.println("\n后序");
+		intTree.postorder();
 		
 	}
 }
