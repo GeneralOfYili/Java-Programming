@@ -1,9 +1,8 @@
 package org.chapter25.listing;
-
 import java.util.ArrayList;
-
 import org.chapter25.base.BST;
 import org.chapter25.base.BST.TreeNode;
+import org.junit.Test;
 
 public class L24$04_TestBST {
 	public static void main(String[] args) {
@@ -40,7 +39,7 @@ public class L24$04_TestBST {
 		}
 		
 		//Integer tree
-		Integer[] numbers = {1,4,3,2,8,5,6,7};
+		Integer[] numbers = {50,12,80,11,34,75,90,20,62,78};
 		BST<Integer> intTree = new BST<>(numbers);
 		System.out.println();
 		System.out.println("中序");
