@@ -1,6 +1,5 @@
 package org.chapter25.base;
 
-
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -13,7 +12,6 @@ public class BTView extends Pane {
 	private double vGap = 50; // Gap between two levels in a tree
 	
 	public BTView(BST<Integer> tree) {
-		super();
 		this.tree = tree;
 		setStatus("tree is empty");
 	}
@@ -35,22 +33,22 @@ public class BTView extends Pane {
 			double hGap) {
 		if (root.left != null) {
 			// Draw a line to the left node
-			getChildren().add(new Line(x-hGap, y+hGap, x, y));
+			getChildren().add(new Line(x-hGap, y+vGap, x, y));
 			// Draw the left subtree recursively
-			displayTree(root.left, x-hGap, y+hGap, hGap/2);
+			displayTree(root.left, x-hGap, y+vGap, hGap/2);
 		}
 		
 		if (root.right != null) {
-			// Draw a line to the left node
-			getChildren().add(new Line(x+hGap, y+hGap, x, y));
+			// Draw a line to the right node
+			getChildren().add(new Line(x+hGap, y+vGap, x, y));
 			// Draw the left subtree recursively
-			displayTree(root.right, x+hGap, y+hGap, hGap/2);
+			displayTree(root.right, x+hGap, y+vGap, hGap/2);
 		}
 		
 		// Display a node
 		Circle circle = new Circle(x, y, radius);
 		circle.setFill(Color.WHITESMOKE);
-		circle.setStroke(Color.BLANCHEDALMOND);
+		circle.setStroke(Color.BLUEVIOLET);
 		getChildren().addAll(circle,new Text(x-4, y+4, root.element+""));
 	}
 	
