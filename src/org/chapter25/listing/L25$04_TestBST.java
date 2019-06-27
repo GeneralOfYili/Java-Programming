@@ -1,10 +1,10 @@
 package org.chapter25.listing;
 import java.util.ArrayList;
+
 import org.chapter25.base.BST;
 import org.chapter25.base.BST.TreeNode;
-import org.junit.Test;
 
-public class L24$04_TestBST {
+public class L25$04_TestBST {
 	public static void main(String[] args) {
 		// Create a BST
 		BST<String> tree = new BST<>();
